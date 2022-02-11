@@ -1,0 +1,24 @@
+body{
+    margin: 0px;
+}
+#header {
+    background-image: url('/757118.jpg');
+    padding: 200px 100px;
+    background-size: cover;
+    background-position: top;
+}
+
+
+
+.episodes{
+    float: left;
+    margin: 4px;
+    width: 200px;
+    height: 250px;
+    background-color: red;
+}
+
+#container{
+    width: 30%;
+    margin: 0 auto;
+}
