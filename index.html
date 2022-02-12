@@ -11,28 +11,33 @@
     <body>
         <header id="header">
             <div id="container">
-                <div id="search" >
+
+                <div class="inputdivs" >
                     <form>
-                        <label for="searchbox">Enter The Episode Name: </label>
-                        <input type="search" name = 'searchbox'>
+                        <label class="labels">Enter The Episode Name: </label>
+                        <input id="inputsearch" type="search" name = 'searchbox'>
                     </form>
                 </div>
+
+                <div class="inputdivs">
+                    <p>OR:</p>
+                </div>
+
+                <div class="inputdivs">
+                    <form>
+                        <label class="labels">Enter the season and Episode: </label>
+                        <select id="select">
+                            <option>Select one: </option>
+                        </select>
+                    </form>
+                </div>
+
             </div>
         </header> 
         <div class = 'episodes'>
 
         </div>
-        <div class = 'episodes'>
 
-        </div>
-        <div class = 'episodes'>
-
-        </div>
-        <div class = 'episodes'>
-
-        </div>
-        <div class = 'episodes'>
-
-        </div>
     </body>
+    <script src="/script.js"></script>
 </html>
