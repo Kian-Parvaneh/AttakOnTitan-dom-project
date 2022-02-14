@@ -78,9 +78,34 @@ function Creator(el){
     const link = document.createElement('a');
     const img = document.createElement('img');
     const p = document.createElement('p');
+    p.setAttribute('class','name');
     img.src = el.image.medium;
     p.textContent = el.name;
-    link.appendChild(img);
-    link.appendChild(p);
+    link.href = el.url;
+    const detailsP = document.createElement('p');
+    detailsP.setAttribute('class','details');
+    if(el.summary.split(' ').length>50)
+        detailsP.innerHTML = (el.summary.split(' ').slice(0,50)).join(' ')+ '...</p>';
+    else
+        detailsP.innerHTML = el.summary;
+    link.append(detailsP,img,p)
     document.querySelector('#episodeContainer').appendChild(link);
+    hoverEventlistenner(detailsP,link,img)
+}
+
+
+
+function hoverEventlistenner(p,link,img){
+    link.addEventListener('mouseover',function(){
+        p.style.display = 'inline-block';
+ 
+        p.style.color = 'white';
+        img.style.opacity = '0.3';
+        link.style.backgroundColor = '#a67440';
+    })
+    link.addEventListener('mouseout',function(){
+        p.style.display = 'none';
+        img.style.opacity = '1';
+        link.style.backgroundColor = 'white';
+    })
 }

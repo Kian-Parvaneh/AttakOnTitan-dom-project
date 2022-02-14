@@ -81,14 +81,21 @@ select{
     text-align: center;
     background-color: white;
     max-width: 346px;
-    max-height: 260px;
+
+    color: black;
 }
 
-#episodeContainer a img,p{
+#episodeContainer a img,.name p{
     padding: 10px;
-
 }
 
 #episodeContainer a:hover{
     cursor:pointer;
+}
+
+.details {
+    display: none;
+    position: absolute;
+    max-width: 270px;
+    margin-top: '0px';
 }
