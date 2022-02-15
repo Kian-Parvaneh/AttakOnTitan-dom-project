@@ -22,10 +22,34 @@ reqMethode((error,got)=>{
     }
 });
 
+
+function searcher(data){
+    const searchBox = document.querySelector('#inputsearch');
+    searchBox.addEventListener('keyup',function(){
+        if(searchBox.value==''){
+            //console.log('runed')
+            document.querySelector('#episodeContainer').innerHTML = "";
+            data.forEach(el=>Creator(el));
+        }
+        else if(document.querySelector('#select').value==="Show All"){
+            
+            const result = data.filter(el=>{
+                if(el.summary)
+                    return (el.name.toLowerCase().includes(searchBox.value.toLowerCase()) || el.summary.toLowerCase().includes(searchBox.value.toLowerCase()));
+                return false;
+            });
+            document.querySelector('#episodeContainer').innerHTML = "";
+            //console.log(result);
+            result.forEach(el=>Creator(el));
+        }
+    })
+}
+
 // console.log(data);
 const creatingMainPage =function(data){
     eventListenner(data);
-    console.log(data);
+    searcher(data);
+    //console.log(data);
     for(const el of data) {
 
         const option = document.createElement('option');
@@ -55,9 +79,9 @@ function eventListenner(data){
         
         seas = chosenStr.split(' ')[0];
         epis = chosenStr.split(' ')[1];
-        console.log(seas,' ',epis);
+        //console.log(seas,' ',epis);
         const chosenData = data.filter((el)=>el.number==epis && el.season == seas);
-        console.log(chosenData);
+        //console.log(chosenData);
         if(chosenData.length===0){
             document.querySelector('#episodeContainer').innerHTML = "";
             data.forEach(el => {
@@ -79,26 +103,30 @@ function Creator(el){
     const img = document.createElement('img');
     const p = document.createElement('p');
     p.setAttribute('class','name');
-    img.src = el.image.medium;
+    if(el.image)
+        img.src = el.image.medium;
     p.textContent = el.name;
     link.href = el.url;
     const detailsP = document.createElement('p');
     detailsP.setAttribute('class','details');
-    if(el.summary.split(' ').length>50)
-        detailsP.innerHTML = (el.summary.split(' ').slice(0,50)).join(' ')+ '...</p>';
-    else
-        detailsP.innerHTML = el.summary;
+    if(el.summary)
+        if(el.summary.split(' ').length>50)
+            detailsP.innerHTML = (el.summary.split(' ').slice(0,50)).join(' ')+ '...</p>';
+        else
+            detailsP.innerHTML = el.summary;
     link.append(detailsP,img,p)
     document.querySelector('#episodeContainer').appendChild(link);
-    hoverEventlistenner(detailsP,link,img)
+    hoverEventlistenner(detailsP,link,img,p,el);
 }
 
 
 
-function hoverEventlistenner(p,link,img){
+function hoverEventlistenner(p,link,img,nameAndHour,el){
+    let holder;
     link.addEventListener('mouseover',function(){
         p.style.display = 'inline-block';
- 
+        holder = nameAndHour.textContent;
+        nameAndHour.innerHTML = nameAndHour.textContent+ "<br>" +'Run Time: '+el.runtime
         p.style.color = 'white';
         img.style.opacity = '0.3';
         link.style.backgroundColor = '#a67440';
@@ -106,6 +134,7 @@ function hoverEventlistenner(p,link,img){
     link.addEventListener('mouseout',function(){
         p.style.display = 'none';
         img.style.opacity = '1';
+        nameAndHour.textContent = holder
         link.style.backgroundColor = 'white';
     })
 }
