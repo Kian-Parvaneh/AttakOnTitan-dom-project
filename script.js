@@ -114,6 +114,7 @@ function Creator(el){
             detailsP.innerHTML = (el.summary.split(' ').slice(0,50)).join(' ')+ '...</p>';
         else
             detailsP.innerHTML = el.summary;
+    link.target="_blank";
     link.append(detailsP,img,p)
     document.querySelector('#episodeContainer').appendChild(link);
     hoverEventlistenner(detailsP,link,img,p,el);
